@@ -1,0 +1,26 @@
+what is a controller?
+Controller is basically a device which sends some signal to the device to which it is connected. The device then updates the data like position, status, etc based on the signal(data/commands) received.
+
+Need:
+1) they help us by making the signals more accurate, i.e, the task we want to perform gets completed with less bugs and distortions
+2) reduces the number of tasks to be performed during runtime to control the machine
+
+Controllers can Proportional,Integral or Derivative controller. We can combine two or more of these to make a controller.
+
+Proportional controllers-- this controller works on the basis of proportionality between the operating signal and the error signal.
+	o=Ke, where o-operating signal, K-constant of proportionality and e-error signal
+	Since, it works based on the proportionality the deviation between the signals should not change continuously and the deviation also should   		not be large.
+
+Integral controllers -- this controller works on the math of integration. It tries to eliminate the steady-state error.
+	operating signal is directly proportion to integral of error signal with respect to time calculated from 0 to time(t)
+
+Derivative controller-- it should be used in combination with either or both of the above controllers as this controller does not help us steady-state 		and also creates more noise. In this type of controller, the operating signal is directly proportional to the derivate of the error signal 		with respect to time.
+
+The controller interacts with the resources and interfaces. There is one read only interface and one read and write interface. Actuators are present which actually helps the controller to interact with hardware read only is more about the sensors and force things whereas the read and write is about status of joints like position, velocity,etc.
+
+ROS has library for controllers named ros_control which has many predefined controllers but there is always an option to create a custom controller.
+Some of the predefined ros controllers are effort_controllers, joint_state_controller, etc. For working with ros_control, we have to define the transmissions which are basically used to keep the power constant, i.e,the product of velocity and force.
+
+Controllers are really important as they can be used to link different parts and a user can control all the parts with the help of just one controller which can send commands to different parts for different types of tasks to be performed and all different task can be performed at the same time. Its use makes the process light and efficent which otherwise would have been a lot cumbersome. For example, one can connect a effort_controller and velocity_controllers to the hardware and set values to both the controllers in order to move the machine by applying a certain force and velocity.
+
+
