@@ -5,16 +5,15 @@ Need:
 1) they help us by making the signals more accurate, i.e, the task we want to perform gets completed with less bugs and distortions
 2) reduces the number of tasks to be performed during runtime to control the machine
 
-Controllers can Proportional,Integral or Derivative controller. We can combine two or more of these to make a controller.
+Controllers can be Proportional and integral controllers,Proportional and derivative controllers,Proportional integral derivative control. We can combine two or more of these to make a controller.
 
 Proportional controllers-- this controller works on the basis of proportionality between the operating signal and the error signal.
 	o=Ke, where o-operating signal, K-constant of proportionality and e-error signal
 	Since, it works based on the proportionality the deviation between the signals should not change continuously and the deviation also should   		not be large.
 
-Integral controllers -- this controller works on the math of integration. It tries to eliminate the steady-state error.
-	operating signal is directly proportion to integral of error signal with respect to time calculated from 0 to time(t)
+Integral controllers -- this controller works on the math of integration. It tries to eliminate the steady-state error. operating signal is directly proportion to integral of error signal with respect to time calculated from 0 to time(t)
 
-Derivative controller-- it should be used in combination with either or both of the above controllers as this controller does not help us steady-state 		and also creates more noise. In this type of controller, the operating signal is directly proportional to the derivate of the error signal 		with respect to time.
+Derivative controller-- it should be used in combination with either or both of the above controllers as this controller does not help us steady-state and also creates more noise. In this type of controller, the operating signal is directly proportional to the derivate of the error signal with respect to time.
 
 The controller interacts with the resources and interfaces. There is one read only interface and one read and write interface. Actuators are present which actually helps the controller to interact with hardware read only is more about the sensors and force things whereas the read and write is about status of joints like position, velocity,etc.
 
