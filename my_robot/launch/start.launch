@@ -1,0 +1,5 @@
+<launch>
+	<param name="robot_description" textfile="$(find my_robot)/urdf/robot.xml"/>
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+	</node>
+</launch>

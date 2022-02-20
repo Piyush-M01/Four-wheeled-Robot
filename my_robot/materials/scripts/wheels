@@ -1,0 +1,13 @@
+material wheels11{
+receive_shadows off 
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture wheels1.png
+            }
+        }   
+    }
+}

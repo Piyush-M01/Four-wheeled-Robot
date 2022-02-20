@@ -56,6 +56,7 @@
 		<visual>
 		<geometry>
 			<cylinder length="0.2" radius="0.2"/>
+			<!--mesh filename="package://my_robot/materials/Wheel Piyush v1.stl" scale="0.01 0.01 0.01"/-->
 		</geometry>
 		<material name="red"/>
 		<origin xyz="0 0 0" rpy="1.57 1.57 0" />

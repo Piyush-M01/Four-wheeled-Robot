@@ -9,6 +9,12 @@ project(my_robot)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   urdf
+  rospy
+  roscpp
+  dynamic_reconfigure
+  std_msgs
+  geometry_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -45,18 +51,18 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+ #add_message_files(
+  #FILES
+   #Twist.msg
+   #Pose.msg
+ #)
 
 ## Generate services in the 'srv' folder
-# add_service_files(
+ #add_service_files(
 #   FILES
 #   Service1.srv
 #   Service2.srv
-# )
+ #)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -66,9 +72,9 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
+ #generate_messages(
+   #DEPENDENCIES
+   #std_msgs  # Or other packages containing msgs
 # )
 
 ################################################
@@ -86,10 +92,9 @@ find_package(catkin REQUIRED COMPONENTS
 ##     and list every .cfg file to be processed
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
-# generate_dynamic_reconfigure_options(
-#   cfg/DynReconf1.cfg
-#   cfg/DynReconf2.cfg
-# )
+generate_dynamic_reconfigure_options(
+  cfg/config.cfg
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -202,5 +207,10 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
- add_executable(parser src/parser.cpp)
- target_link_libraries(parser ${catkin_LIBRARIES})
+ #add_executable(parser src/parser.cpp)
+ #target_link_libraries(parser ${catkin_LIBRARIES})
+add_executable(my_robot src/main.cpp)
+target_link_libraries(my_robot ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+add_dependencies(my_robot my_robot_gencpp)
+
+#/home/piyush/catkin_ws/src/my_robot/src/dynamic_reconfigure.cpp
