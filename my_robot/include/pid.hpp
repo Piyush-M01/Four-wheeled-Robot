@@ -25,6 +25,5 @@ class Pidcontrol
     ros::Publisher pub;
     ros::Subscriber sub;
     
-
 };
 #endif

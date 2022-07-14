@@ -8,13 +8,15 @@ project(my_robot)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  urdf
-  rospy
   roscpp
+  rospy
+  urdf
+  tf2
   dynamic_reconfigure
   std_msgs
   geometry_msgs
   message_generation
+  tf2_ros
 )
 
 ## System dependencies are found with CMake's conventions
@@ -51,18 +53,18 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
- #add_message_files(
-  #FILES
-   #Twist.msg
-   #Pose.msg
- #)
+# add_message_files(
+#   FILES
+#   Message1.msg
+#   Message2.msg
+# )
 
 ## Generate services in the 'srv' folder
- #add_service_files(
+# add_service_files(
 #   FILES
 #   Service1.srv
 #   Service2.srv
- #)
+# )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -72,9 +74,9 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
- #generate_messages(
-   #DEPENDENCIES
-   #std_msgs  # Or other packages containing msgs
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs  # Or other packages containing msgs
 # )
 
 ################################################
@@ -108,7 +110,7 @@ generate_dynamic_reconfigure_options(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES my_robot
-#  CATKIN_DEPENDS urdf
+#  CATKIN_DEPENDS roscpp rospy tf2 tf2_ros
 #  DEPENDS system_lib
 )
 
@@ -207,10 +209,7 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
- #add_executable(parser src/parser.cpp)
- #target_link_libraries(parser ${catkin_LIBRARIES})
-add_executable(my_robot src/main.cpp)
-target_link_libraries(my_robot ${catkin_LIBRARIES} ${PCL_LIBRARIES})
-add_dependencies(my_robot my_robot_gencpp)
-
-#/home/piyush/catkin_ws/src/my_robot/src/dynamic_reconfigure.cpp
+#cmake_policy(CMP0079 NEW)
+add_executable(${PROJECT_NAME}_node src/main.cpp)
+target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
+add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
