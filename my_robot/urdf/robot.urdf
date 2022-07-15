@@ -170,13 +170,6 @@
 		<joint_properties damping="1.0" friction="1.0" />
 	</joint>
 
-
-	<joint name="camera_joint" type="fixed">
-    <axis xyz="0 1 0" />
-    <origin xyz="0.05 0 0.075" rpy="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="camera_link"/>
-  </joint>
 	<!-- <xacro:property name="camera_link" value="0.05" />  -->
   <!-- Camera !-->
   <link name="camera_link">
@@ -200,43 +193,53 @@
       <origin xyz="0 0 0.1" rpy="0 0 0"/>
       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
     </inertial>
-  </link> -->
+  </link>
+
+<joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.05 0 0.075" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+  </joint>
+
   	<gazebo reference="camera_link">
-		<sensor type="camera" name="camera1">
+		<sensor type="depth" name="camera">
 			<update_rate>30.0</update_rate>
 			<camera name="head">
-				<horizontal_fov>1.3962634</horizontal_fov>
+				<horizontal_fov>1.047198</horizontal_fov>
 				<image>
-					<width>800</width>
-					<height>800</height>
+					<width>640</width>
+					<height>480</height>
 					<format>R8G8B8</format>
 				</image>
 				<clip>
-					<near>0.02</near>
-					<far>300</far>
+					<near>0.05</near>
+					<far>3</far>
 				</clip>
-				<noise>
-					<type>gaussian</type>
-				<!-- Noise is sampled independently per pixel on each frame.
-					That pixel's noise value is added to each of its color
-					channels, which at that point lie in the range [0,1]. !-->
-					<mean>0.0</mean>
-					<stddev>0.007</stddev>
-				</noise>
 			</camera>
-				<plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+				<plugin name="camera_controller" filename="libgazebo_ros_openni_kinect.so">
+					<baseline>0.2</baseline>
 					<alwaysOn>true</alwaysOn>
-					<updateRate>0.0</updateRate>
-					<cameraName>my_robot/camera1</cameraName>
+					<updateRate>30</updateRate>
+					<cameraName>my_robot/camera</cameraName>
 					<imageTopicName>image_raw</imageTopicName>
 					<cameraInfoTopicName>camera_info</cameraInfoTopicName>
+					<depthImageTopicName>/my_robot/camera/depth/image_raw</depthImageTopicName>
+      				<depthImageInfoTopicName>/my_robot/camera/depth/camera_info</depthImageInfoTopicName>
+					<pointCloudTopicName>/my_robot/camera/depth/points</pointCloudTopicName>
 					<frameName>camera_link</frameName>
-					<hackBaseline>0.07</hackBaseline>
-					<distortionK1>0.0</distortionK1>
-					<distortionK2>0.0</distortionK2>
-					<distortionK3>0.0</distortionK3>
-					<distortionT1>0.0</distortionT1>
-					<distortionT2>0.0</distortionT2>
+					<pointCloudCutoff>0.5</pointCloudCutoff>
+      				<pointCloudCutoffMax>3.0</pointCloudCutoffMax>
+					<distortionK1>0.00000001</distortionK1>
+					<distortionK2>0.00000001</distortionK2>
+					<distortionK3>0.00000001</distortionK3>
+					<distortionT1>0.00000001</distortionT1>
+					<distortionT2>0.00000001</distortionT2>
+					<CxPrime>0</CxPrime>
+					<Cx>0</Cx>
+					<Cy>0</Cy>
+					<focalLength>0</focalLength>
+					<hackBaseline>0</hackBaseline>
 				</plugin>
 		</sensor>
   	</gazebo>
