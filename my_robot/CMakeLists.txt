@@ -12,11 +12,14 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   urdf
   tf2
+  cv_bridge
+  image_transport
   dynamic_reconfigure
   std_msgs
   geometry_msgs
   message_generation
   tf2_ros
+  move_base
 )
 
 ## System dependencies are found with CMake's conventions
@@ -210,8 +213,14 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 #cmake_policy(CMP0079 NEW)
+find_package(OpenCV)
+include_directories(${OpenCV_INCLUDE_DIRS} )
 add_executable(${PROJECT_NAME}_node src/main.cpp)
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_executable(${PROJECT_NAME}_broadcaster_node src/broadcaster.cpp)
 target_link_libraries(${PROJECT_NAME}_broadcaster_node ${catkin_LIBRARIES})
+add_executable(kdl src/broadcaster.cpp)
+target_link_libraries(kdl ${catkin_LIBRARIES})
+add_executable(image_convert src/image_converter.cpp)
+target_link_libraries(image_convert ${catkin_LIBRARIES} ${OpenCV_LIBS})
