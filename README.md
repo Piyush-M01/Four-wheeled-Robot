@@ -13,4 +13,11 @@ rosrun my_robot my_robot
    
 Dynamic Reconfigure:   
 rosrun rqt_reconfigure rqt_reconfigure
-
+   
+Mapping:   
+1) roslaunch my_robot gazebo.launch   
+2) roslaunch my_robot mapping.launch -- uses gmapping package   
+   
+Running Navigation Stack:   
+1) roslaunch my_robot gazebo.launch   
+2) roslaunch my_robot localisation.launch -- uses amcl package
